@@ -47,7 +47,7 @@ I’m constantly improving my **problem-solving abilities** by practicing **Data
 ## 🐍 Contribution Snake  
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/omi1808/omi1808/output/github-contribution-grid-snake.svg" alt="snake animation"/>
+  <img src="https://raw.githubusercontent.com/omi1808/omi1808/output/snake.svg" alt="Snake animation" />
 </p>
 
 ---
