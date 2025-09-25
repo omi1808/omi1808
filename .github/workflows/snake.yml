@@ -1,5 +1,6 @@
 name: Snake Animation
 
+# Run workflow on push and daily
 on:
   push:
     branches:
@@ -15,23 +16,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      # Step 1: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
 
+      # Step 2: Generate snake animation directly (simple text-based)
       - name: Generate Snake Animation
         run: |
-          python generate_snake.py   # your actual command
+          # Example: create a simple snake animation in text form
+          echo '```text' > snake.txt
+          echo 'S N A K E   A N I M A T I O N' >> snake.txt
+          echo '→ → → → → → →' >> snake.txt
+          echo '← ← ← ← ← ← ←' >> snake.txt
+          echo '```' >> snake.txt
 
+      # Step 3: Update README with animation
       - name: Update README
         run: |
           echo "## 🐍 Snake Animation" > README.md
-          echo "![Snake Animation](snake.gif)" >> README.md
+          cat snake.txt >> README.md
 
-      - name: Commit & Push changes
+      # Step 4: Commit & push changes
+      - name: Commit & Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
+          git add README.md snake.txt
           git diff --quiet || git commit -m "Update snake animation"
           git push origin main
         env:
