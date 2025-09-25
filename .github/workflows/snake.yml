@@ -1,27 +1,41 @@
 name: Snake Animation
 
+# Trigger the workflow on push to main or on a schedule
 on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '0 0 * * *' # optional: runs daily at midnight
 
+# Give workflow permission to write to repo
 permissions:
   contents: write
 
 jobs:
   update-snake:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Run snake animation script
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Run your snake animation generation script
+      - name: Generate Snake Animation
         run: |
-          # your script here
-      - name: Commit & Push
+          # Replace this with your actual snake generation commands
+          echo "Generating snake animation..."
+          # Example: python generate_snake.py
+          # Make sure this creates/updates files in the repo
+
+      # Step 3: Commit and push changes if there are any
+      - name: Commit & Push changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Update snake animation"
+          git diff --quiet || git commit -m "Update snake animation"
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
